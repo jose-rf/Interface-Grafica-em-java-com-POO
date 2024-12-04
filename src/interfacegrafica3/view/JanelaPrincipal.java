@@ -5,6 +5,8 @@
 package interfacegrafica3.view;
 
 import interfacegrafica3.model.Pessoa;
+import interfacegrafica3.repository.Conexao;
+import interfacegrafica3.repository.ConexaoMySQL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,12 +19,27 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     JanelaCadastro janelaCadastro;
     public List<Pessoa> lstPessoa;
+    public int ultimoId;
+    private Conexao conexao;
+    private ConexaoMySQL conexaoMySQL;
     /**
      * Creates new form JanelaPrincipal
      */
     public JanelaPrincipal() {
         initComponents();
         lstPessoa = new ArrayList<>();
+        ultimoId = 0;
+        conexao = new Conexao(
+                "localhost",
+                "root",
+                "",
+                3306,
+                "cadastro"
+        );
+        conexaoMySQL = new ConexaoMySQL(conexao);
+        conexaoMySQL.conectar();
+        Pessoa p = new Pessoa("Pessoa1", "email", "end", "tel", 1);
+        conexaoMySQL.insert(p);
     }
 
     /**

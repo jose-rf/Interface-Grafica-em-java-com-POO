@@ -21,6 +21,8 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
     public JanelaCadastro(JanelaPrincipal janelaPrincipal) {
         initComponents();
         this.janelaPrincipal = janelaPrincipal;
+        txtId.setVisible(false); //escondendo o txtId
+        txtId.setText("0");
     }
 
     /**
@@ -42,6 +44,10 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         btnFechar = new javax.swing.JButton();
         btnGravar = new javax.swing.JButton();
+        btnAvancar = new javax.swing.JButton();
+        btnRetroceder = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        btnDeletar = new javax.swing.JButton();
 
         setTitle("Tabela de Cadastro");
         setVisible(true);
@@ -87,6 +93,28 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAvancar.setText("⏩");
+        btnAvancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvancarActionPerformed(evt);
+            }
+        });
+
+        btnRetroceder.setText("⏪");
+        btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederActionPerformed(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.setActionCommand("Gravar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,26 +123,41 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnGravar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFechar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeletar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addComponent(btnFechar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                        .addComponent(btnRetroceder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAvancar)
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +165,8 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +182,10 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGravar)
-                    .addComponent(btnFechar))
+                    .addComponent(btnFechar)
+                    .addComponent(btnAvancar)
+                    .addComponent(btnRetroceder)
+                    .addComponent(btnDeletar))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -154,20 +201,64 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
-        // TODO add your handling code here:
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(txtNome.getText());
-        pessoa.setEndereco(txtEndereco.getText());
-        pessoa.setEmail(txtEmail.getText());
-        pessoa.setTelefone(txtTelefone.getText());
-        //enviar objeto pessoa para o banco de dados lst pessoa
-        //na janela principal
-        janelaPrincipal.lstPessoa.add(pessoa);
-      JOptionPane.showMessageDialog(this,"Cadastro feito com sucesso!", "Tela de cadastro",
-              JOptionPane.INFORMATION_MESSAGE);
-        fecharJanela();
+        //verificar o txtid se tem algum valor:
+        
+        if(Integer.parseInt(txtId.getText()) > 0){
+            //atualizar registro
+             int id = janelaPrincipal.ultimoId+1;
+            Pessoa pessoa = new Pessoa();
+            pessoa.setNome(txtNome.getText());
+            pessoa.setEndereco(txtEndereco.getText());
+            pessoa.setEmail(txtEmail.getText());
+            pessoa.setTelefone(txtTelefone.getText());
+            pessoa.setId(id);
+        //atualizar o registro da lista:
+            janelaPrincipal.lstPessoa.set(id-1, pessoa);
+            janelaPrincipal.ultimoId += 1;
+                JOptionPane.showMessageDialog(this,"Cadastro atualizado com sucesso!", "Tela de cadastro",
+                JOptionPane.INFORMATION_MESSAGE);
+    
+        
+        } else {// TODO add your handling code here:
+        int id = janelaPrincipal.ultimoId+1;
+            Pessoa pessoa = new Pessoa();
+            pessoa.setNome(txtNome.getText());
+            pessoa.setEndereco(txtEndereco.getText());
+            pessoa.setEmail(txtEmail.getText());
+            pessoa.setTelefone(txtTelefone.getText());
+            pessoa.setId(id);
+            //enviar objeto pessoa para o banco de dados lst pessoa
+            //na janela principal
+            janelaPrincipal.lstPessoa.add(pessoa);
+        
+            janelaPrincipal.ultimoId += 1;
+                JOptionPane.showMessageDialog(this,"Cadastro feito com sucesso!", "Tela de cadastro",
+                JOptionPane.INFORMATION_MESSAGE);
+                limparJanela();
+    
+        }
+       
+        
     }//GEN-LAST:event_btnGravarActionPerformed
 
+        private void limparJanela(){
+            txtNome.setText("");
+            txtEmail.setText("");
+            txtEndereco.setText("");
+            txtTelefone.setText("");
+            txtNome.requestFocus();
+        }
+        
+        private void fecharJanela(){
+            instancia = null;
+        }
+        
+        public static JanelaCadastro getInstancia(JanelaPrincipal janelaPrincipal){
+            if(instancia == null)
+                instancia = new JanelaCadastro(janelaPrincipal);
+            return instancia;
+        }
+        
     private void txtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnderecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEnderecoActionPerformed
@@ -175,28 +266,109 @@ public class JanelaCadastro extends javax.swing.JInternalFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
+        // TODO add your handling code here:
+        int i = 0;
+        boolean sair = false;
+        limparJanela();
+        while (i < janelaPrincipal.lstPessoa.size() && !sair){
+            Pessoa pessoa = janelaPrincipal.lstPessoa.get(i);
+            if(pessoa.getId() > Integer.parseInt(txtId.getText())){
+                //jogar os dados da pessoa na tela;
+                txtNome.setText(pessoa.getNome());
+                txtEmail.setText(pessoa.getEmail());
+                txtEndereco.setText(pessoa.getEndereco());
+                txtTelefone.setText(pessoa.getTelefone());
+                txtId.setText(String.valueOf(pessoa.getId()));
+                sair = true;
+            }
+            i++;
+        }
+        if(!sair){
+            limparJanela();
+            txtId.setText("0");
+        }
+    }//GEN-LAST:event_btnAvancarActionPerformed
+
+    private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
+        // TODO add your handling code here:
+        
+        int i = janelaPrincipal.lstPessoa.size() -1;
+        boolean sair = false;
+        limparJanela();
+        while (i >= 0 && !sair){
+            Pessoa pessoa = janelaPrincipal.lstPessoa.get(i);
+            if(pessoa.getId() < Integer.parseInt(txtId.getText())){
+                //jogar os dados da pessoa na tela;
+                txtNome.setText(pessoa.getNome());
+                txtEmail.setText(pessoa.getEmail());
+                txtEndereco.setText(pessoa.getEndereco());
+                txtTelefone.setText(pessoa.getTelefone());
+                txtId.setText(String.valueOf(pessoa.getId()));
+                sair = true;
+            }
+            i--;
+        }
+        if(!sair){
+            limparJanela();
+            txtId.setText("0");
+        }
+
+    }//GEN-LAST:event_btnRetrocederActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        // TODO add your handling code here:
+        if(Integer.parseInt(txtId.getText()) > 0){
+            int resposta = JOptionPane.showConfirmDialog(
+                    this,
+                    "Deseja realmente excluir esse registro?",
+                    "Excluir?",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if(resposta == JOptionPane.YES_OPTION){
+                int id = Integer.parseInt(txtId.getText());
+                janelaPrincipal.lstPessoa.remove(id-1);
+                janelaPrincipal.ultimoId -=1;
+                limparJanela();
+                txtId.setText("0");
+                atualizaIdLista();
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Registro excluído com sucesso",
+                        "Tela de cadastro",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
     
-    private void fecharJanela(){
-        instancia = null;
-        dispose();
-    }
-    
-    public static JanelaCadastro getInstancia(JanelaPrincipal janelaPrincipal){
-        if(instancia == null)
-            instancia = new JanelaCadastro(janelaPrincipal);
-        return instancia;
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvancar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnGravar;
+    private javax.swing.JButton btnRetroceder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizaIdLista() {
+        int id = 0;
+        for(int i = 0; i < janelaPrincipal.lstPessoa.size(); i++){
+            id = i+1;
+            Pessoa pessoa = janelaPrincipal.lstPessoa.get(i);
+            pessoa.setId(id);
+            janelaPrincipal.lstPessoa.set(i, pessoa);
+        }
+    }
 }

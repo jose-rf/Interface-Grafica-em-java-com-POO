@@ -13,8 +13,8 @@ public class PessoaFisica extends Pessoa {
     private String dtNascimento;
     
     public PessoaFisica(String nome, String email, String endereco, String telefone,
-            String cpf, String dtNascimento){
-        super(nome, email, endereco, telefone);
+            String cpf, String dtNascimento, int id){
+        super(nome, email, endereco, telefone, id);
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
     }

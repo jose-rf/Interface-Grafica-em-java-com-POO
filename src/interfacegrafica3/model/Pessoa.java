@@ -9,20 +9,28 @@ package interfacegrafica3.model;
  * @author joser
  */
 public class Pessoa {
+    int id;
     private String nome;
     private String endereco;
     private String telefone;
     private String email;
     
+    
+    
     //metodo construtor
-    public Pessoa(String nome, String endereco, String telefone, String email){
+    public Pessoa(String nome, String endereco, String telefone, String email, int id){
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.email = email;
+        this.id = id;
     }
     
     public Pessoa(){
+    }
+
+    public int getId() {
+        return id;
     }
     
     public String getNome(){
@@ -56,6 +64,12 @@ public class Pessoa {
     public void setEmail(String email){
         this.email = email;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     @Override
     public String toString() {

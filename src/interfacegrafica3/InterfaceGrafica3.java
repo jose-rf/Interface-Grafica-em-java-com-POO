@@ -7,6 +7,7 @@ package interfacegrafica3;
 import interfacegrafica3.model.Pessoa;
 import interfacegrafica3.model.PessoaFisica;
 import interfacegrafica3.model.PessoaJuridica;
+import interfacegrafica3.view.JanelaPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -22,11 +23,11 @@ public class InterfaceGrafica3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
+        JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
         janelaPrincipal.setVisible(true);
-        janelaPrincipal.setTitle("Cadastro de clientes");*/
+        janelaPrincipal.setTitle("Cadastro de clientes");
         
-        Pessoa pessoa = new Pessoa("Jose", "jose@gmail.com", "Rua", "telefone");
+       /* Pessoa pessoa = new Pessoa("Jose", "jose@gmail.com", "Rua", "telefone");
         
         JOptionPane.showMessageDialog(
             null,
@@ -66,7 +67,7 @@ public class InterfaceGrafica3 {
                 "Teste",
                 JOptionPane.ERROR_MESSAGE
             );
-    }
+    } */
     }//main
    
 }//classe
