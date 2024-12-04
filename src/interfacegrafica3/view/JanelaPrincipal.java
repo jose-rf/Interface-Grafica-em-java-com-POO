@@ -9,11 +9,12 @@ import interfacegrafica3.repository.Conexao;
 import interfacegrafica3.repository.ConexaoMySQL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author joser
+ * @author Professor
  */
 public class JanelaPrincipal extends javax.swing.JFrame {
 
@@ -21,7 +22,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     public List<Pessoa> lstPessoa;
     public int ultimoId;
     private Conexao conexao;
-    private ConexaoMySQL conexaoMySQL;
+    public ConexaoMySQL conexaoMySQL;
+    
     /**
      * Creates new form JanelaPrincipal
      */
@@ -38,8 +40,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         );
         conexaoMySQL = new ConexaoMySQL(conexao);
         conexaoMySQL.conectar();
-        Pessoa p = new Pessoa("Pessoa1", "email", "end", "tel", 1);
-        conexaoMySQL.insert(p);
+        //Pessoa p = new Pessoa("Pessoa1", "email","end","tel",1);
+        //conexaoMySQL.insert(p);
     }
 
     /**
@@ -125,27 +127,38 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         try{
-        janelaCadastro = JanelaCadastro.getInstancia(this);
-        if(!desktopPane.isAncestorOf(janelaCadastro)){
-            desktopPane.add("JanelaCadastro", janelaCadastro);
-        }
-        janelaCadastro.setVisible(true);
-        janelaCadastro.setSelected(true);
+            janelaCadastro = JanelaCadastro.getInstancia(this);
+            if(!desktopPane.isAncestorOf(janelaCadastro)){
+                desktopPane.add("JanelaCadastro", janelaCadastro);
+                janelaCadastro.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+            }
+            
+            janelaCadastro.setSelected(true);
         }catch(Exception ex){
-            JOptionPane.showConfirmDialog(null,"Erro ao abrir a tela de cadastro de clientes",
-                    "Cadastro de clientes", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(null, 
+                    "Erro ao abrir a tela de cadastro de clientes: ",
+                    "Cadastro de clientes",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
-        // Exibir a qtd de dados da lista:
-        JOptionPane.showMessageDialog(this, "Qtd de pessoas: " + lstPessoa.size(),
-                "Cadastro de clientes", JOptionPane.INFORMATION_MESSAGE);
-        //imprimir todos os registros da lista
+        //exibir a qte de dados da lista:
+        JOptionPane.showMessageDialog(
+                this,
+                "Qte de pessoas: " + lstPessoa.size(),
+                "Cadastro de clientes",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        //imprimir todos os registros da minha lista:
         for(int i = 0; i < lstPessoa.size(); i++){
             Pessoa p = lstPessoa.get(i);
-            JOptionPane.showMessageDialog(this, p.toString(), "Cadastro de pessoa",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this,
+                p.toString(),
+                "Cadastro de pessoa",
+                JOptionPane.INFORMATION_MESSAGE
+            );
         }
     }//GEN-LAST:event_contentMenuItemActionPerformed
 

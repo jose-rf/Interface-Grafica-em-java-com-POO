@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
- * @author joser
+ * @author Professor
  */
 public class InterfaceGrafica3 {
 
@@ -27,47 +26,64 @@ public class InterfaceGrafica3 {
         janelaPrincipal.setVisible(true);
         janelaPrincipal.setTitle("Cadastro de clientes");
         
-       /* Pessoa pessoa = new Pessoa("Jose", "jose@gmail.com", "Rua", "telefone");
-        
+        /*
+        // explicação do polimorfismo:
+        Pessoa pessoa = new Pessoa("Maria",
+                                  "maria@a.com",
+                                "endereco",
+                                "telefone");
         JOptionPane.showMessageDialog(
-            null,
-            pessoa.toString(),
-            "Teste",
-            JOptionPane.INFORMATION_MESSAGE
+                null,
+                pessoa.toString(),
+                "Teste",
+                JOptionPane.INFORMATION_MESSAGE
         );
         
-        Pessoa pf = new PessoaFisica("Maria", "Maria@bjp", "Amazonas", "666-666", 
-                "241.123.432-98", "13/04/2005");
-         
+        Pessoa pf = new PessoaFisica(
+                "Jao",
+                "jao@b.com",
+                "endereco jao",
+                "tel do jao",
+                "111.111.111-11",
+                "01/01/1990"
+        );
         
-        Pessoa pj = new PessoaJuridica("22.222.222/0001-22", "Insento", "Bar", 
-            "Pedro", "Cuiaba", "999-888", "Pedro@academia.com");
-    
-    List<Pessoa> lstPessoa = new ArrayList<>();
-    lstPessoa.add(pf);
-    lstPessoa.add(pj);
-    lstPessoa.add(pj);
-    lstPessoa.add(pj);
-    lstPessoa.add(pf);
+        Pessoa pj = new PessoaJuridica(
+                "22.222.222/0001-22",
+                "Isento",
+                "Loja do Ze",
+                "Ze SA",
+                "ze@b.com",
+                "endereco do ze",
+                "telefone do Ze"
+        );
+        
+        List<Pessoa> lstPessoa = new ArrayList<>();
+        lstPessoa.add(pf);
+        lstPessoa.add(pj);
+        lstPessoa.add(pj);
+        lstPessoa.add(pj);
+        lstPessoa.add(pf);
      
-    
-    for(int i = 0 ; i < lstPessoa.size(); i++){
-        JOptionPane.showMessageDialog(
-                null,
-                lstPessoa.get(i).toString(),
-                "Teste",
-                JOptionPane.ERROR_MESSAGE
+        for(int i = 0; i < lstPessoa.size(); i++){
+            JOptionPane.showMessageDialog(
+                    null,
+                    lstPessoa.get(i).toString(),
+                    "Teste",
+                    JOptionPane.ERROR_MESSAGE
             );
         }//for
-    
-    for ( Pessoa p : lstPessoa){
-        JOptionPane.showMessageDialog(
-                null,
-                p.toString(),//ola
-                "Teste",
-                JOptionPane.ERROR_MESSAGE
+        
+        for(Pessoa p : lstPessoa){
+            JOptionPane.showMessageDialog(
+                    null,
+                    p.toString(),
+                    "Teste",
+                    JOptionPane.ERROR_MESSAGE
             );
-    } */
-    }//main
-   
+        }//for
+        */
+        
+    }//método main
+    
 }//classe

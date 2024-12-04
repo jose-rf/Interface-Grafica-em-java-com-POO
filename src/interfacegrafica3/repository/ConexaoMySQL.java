@@ -7,16 +7,15 @@ package interfacegrafica3.repository;
 import interfacegrafica3.model.Pessoa;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
- * @author joser
+ * @author Professor
  */
 public class ConexaoMySQL {
     private Conexao conexao = null;
-    public static Connection connection = null; 
+    public static Connection connection = null;
     
     public ConexaoMySQL(Conexao conexao){
         this.conexao = conexao;
@@ -25,9 +24,11 @@ public class ConexaoMySQL {
     public boolean conectar(){
         if(conexao != null){
             try{
-                String url = "jdbc:mysql://" + conexao.getEndereco() + 
-                        ":" + conexao.getPorta() + 
-                        "/" + conexao.getNomeBanco();
+                String url = "jdbc:mysql://" + conexao.getEndereco() +
+                             ":" + conexao.getPorta() +
+                             "/" + conexao.getNomeBanco();
+                
+                //pegar a classe da Librarie q adicionamos:
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 
                 connection = DriverManager.getConnection(
@@ -35,17 +36,16 @@ public class ConexaoMySQL {
                         conexao.getUser(),
                         conexao.getPassword()
                 );
-                return true;
-                
+                return true;                
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(
                         null,
                         "Erro ao conectar no banco de dados: " + ex.getMessage(),
                         "Erro ao conectar",
                         JOptionPane.ERROR_MESSAGE
-                );
+                ); 
                 return false;
-            }//catch
+            } //catch
         }else{
             return false;
         }
@@ -55,18 +55,18 @@ public class ConexaoMySQL {
         PreparedStatement stmt = null;
         try{
             String comando = "INSERT INTO cadastro_pessoa(nome, endereco, email, telefone) " +
-                    "VALUES(?, ?, ?, ?)";
+                             "VALUES(?, ?, ?, ?)";
             stmt = connection.prepareStatement(comando);
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getEndereco());
             stmt.setString(3, pessoa.getEmail());
             stmt.setString(4, pessoa.getTelefone());
-        
-        }catch(SQLException ex){
+            stmt.executeUpdate();
+            stmt.close();
+        }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
         return false;
-    
     }
     
 }

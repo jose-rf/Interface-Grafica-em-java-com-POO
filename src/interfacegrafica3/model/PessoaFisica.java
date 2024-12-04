@@ -6,14 +6,14 @@ package interfacegrafica3.model;
 
 /**
  *
- * @author joser
+ * @author Professor
  */
 public class PessoaFisica extends Pessoa {
     private String cpf;
     private String dtNascimento;
     
     public PessoaFisica(String nome, String email, String endereco, String telefone,
-            String cpf, String dtNascimento, int id){
+                        String cpf, String dtNascimento, int id){
         super(nome, email, endereco, telefone, id);
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
@@ -23,12 +23,12 @@ public class PessoaFisica extends Pessoa {
         return cpf;
     }
 
-    public String getDtNascimento() {
-        return dtNascimento;
-    }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getDtNascimento() {
+        return dtNascimento;
     }
 
     public void setDtNascimento(String dtNascimento) {
@@ -37,12 +37,13 @@ public class PessoaFisica extends Pessoa {
 
     @Override
     public String toString() {
-        return "PessoaFisica{" + 
-                "Nome = "      + super.getNome()        +
-                ", email = "   + super.getEmail()       +
-                ", telefone "  + super.getTelefone()    +
-                ", cpf = "     + cpf                    + 
-                ", dtNascimento = " + dtNascimento      + "}";
+        return "PessoaFisica{"    +
+                  "nome="         + super.getNome()     + 
+                ", email="        + super.getEmail()    +
+                ", endereco="     + super.getEndereco() +
+                ", telefone="     + super.getTelefone() +
+                ", cpf="          + cpf                 + 
+                ", dtNascimento=" + dtNascimento        + '}';
     }
     
     
