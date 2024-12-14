@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class JanelaPrincipal extends javax.swing.JFrame {
 
     JanelaCadastro janelaCadastro;
+    JanelaCadastroUF janelaCadastroUF;
     public List<Pessoa> lstPessoa;
     public int ultimoId;
     private Conexao conexao;
@@ -57,6 +58,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
+        openMenuItem1 = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
@@ -75,6 +77,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
         fileMenu.add(openMenuItem);
+
+        openMenuItem1.setMnemonic('u');
+        openMenuItem1.setText("Cadastro de UF");
+        openMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(openMenuItem1);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Sair");
@@ -126,6 +137,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+        //menu cadastro pessoa
         try{
             janelaCadastro = JanelaCadastro.getInstancia(this);
             if(!desktopPane.isAncestorOf(janelaCadastro)){
@@ -161,6 +173,24 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             );
         }
     }//GEN-LAST:event_contentMenuItemActionPerformed
+
+    private void openMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItem1ActionPerformed
+        //menu cadastro uf
+        try{
+            janelaCadastroUF = JanelaCadastroUF.getInstancia(this);
+            if(!desktopPane.isAncestorOf(janelaCadastroUF)){
+                desktopPane.add("JanelaCadastroUF", janelaCadastroUF);
+                janelaCadastroUF.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+            }
+            
+            janelaCadastroUF.setSelected(true);
+        }catch(Exception ex){
+            JOptionPane.showConfirmDialog(null, 
+                    "Erro ao abrir a tela de cadastro de UF: ",
+                    "Cadastro de UF",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_openMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,6 +236,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
+    private javax.swing.JMenuItem openMenuItem1;
     // End of variables declaration//GEN-END:variables
 
 }
