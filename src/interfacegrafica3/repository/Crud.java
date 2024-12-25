@@ -4,6 +4,7 @@
  */
 package interfacegrafica3.repository;
 import java.sql.Connection;
+import java.util.List;
 /**
  *
  * @author Professor
@@ -13,4 +14,5 @@ public interface Crud<T> {
     public boolean atualizar(Connection connection, T entity);
     public boolean deletar(Connection connection, T entity);
     public T selecionar(Connection connection, String operador, int id);
+    public List<T> listar(Connection connection, String nomeDaTabela);
 }

@@ -9,6 +9,7 @@ import interfacegrafica3.model.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -143,5 +144,12 @@ public class PessoaRepository implements Crud<Pessoa> {
             return null;
         }
     }
+
+    @Override
+    public List<Pessoa> listar(Connection connection, String nomeDaTabela) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
         
 }

@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -107,6 +109,31 @@ public class UfRepository implements Crud<Uf> {
                 }
             }
             return uf;
+        }catch(Exception ex){            
+            return null;
+        }
+    }
+
+    @Override
+    public List<Uf> listar(Connection connection, String nomeDaTabela) {
+        try{
+            List<Uf> ufList = new ArrayList<>();
+            
+            PreparedStatement stmt = null;
+            String comando = "SELECT * FROM " + nomeDaTabela;
+            stmt = connection.prepareStatement(comando);
+            ResultSet res = stmt.executeQuery();
+            if(res != null){
+                while (res.next()) {
+                    int id = res.getInt("id");
+                    String nome = res.getString("nome");
+                    String sigla = res.getString("sigla");
+                
+                    Uf uf = new Uf(nome, sigla, id);
+                    ufList.add(uf);
+                }
+            }
+            return ufList;
         }catch(Exception ex){            
             return null;
         }

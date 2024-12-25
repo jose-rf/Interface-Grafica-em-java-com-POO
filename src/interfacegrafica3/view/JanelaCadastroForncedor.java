@@ -4,17 +4,26 @@
  */
 package interfacegrafica3.view;
 
+import interfacegrafica3.model.Fornecedor;
+import interfacegrafica3.model.Uf;
+import interfacegrafica3.repository.FornecedorRepository;
+import interfacegrafica3.repository.UfRepository;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joser
  */
 public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
-
+    private JanelaPrincipal janelaPrincipal;
     /**
      * Creates new form JanelaCadastroForncedor
+     * @param janelaPrincipal
      */
-    public JanelaCadastroForncedor() {
+    public JanelaCadastroForncedor(JanelaPrincipal janelaPrincipal) {
         initComponents();
+        this.janelaPrincipal = janelaPrincipal;
     }
 
     /**
@@ -41,7 +50,7 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
         btnFechar = new javax.swing.JButton();
         btnRetroceder = new javax.swing.JButton();
         btnAvancar = new javax.swing.JButton();
-        id = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         selectUF = new javax.swing.JComboBox<>();
@@ -74,6 +83,11 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
         jLabel2.setText("E-mail:");
 
         btnGravar.setText("Gravar");
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -88,9 +102,9 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
 
         btnAvancar.setText("⏩");
 
-        id.addActionListener(new java.awt.event.ActionListener() {
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
@@ -107,7 +121,7 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -191,7 +205,7 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGravar)
@@ -217,10 +231,79 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        String cnpj = txtCNPJ.getText();
+        String inscricaoEstadual = txtIncricaoEstadual.getText();
+        String nomeFantasia = txtNomeFantasia.getText();
+        String nome = txtNome.getText();
+        String email = txtEmail.getText();
+        String endereco = "ENDERECO"; //CORRIGIR
+        String telefone = txtTelefone.getText();
+        String categoria = txtCategoria.getText();
+        String ufSelecionado = (String) selectUF.getSelectedItem();
+        int id = Integer.parseInt(txtId.getText());
+        
+        UfRepository ufRepository = new UfRepository();
+        List<Uf> listaDeUfs = ufRepository.listar(janelaPrincipal.conexaoMySQL.connection, "uf");
+        Uf ufEncontrado = listaDeUfs.stream()
+                             .filter(uf -> uf.getNome().equals(ufSelecionado))
+                             .findFirst()
+                             .orElse(null);
+        
+        if(ufEncontrado == null){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "O UF selecionado é inválido!",
+                    "Erro",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }  
+        
+        Fornecedor fornecedor = new Fornecedor(cnpj, inscricaoEstadual, nomeFantasia, nome, email, endereco, telefone,
+        categoria, ufEncontrado, id);
+        
+        FornecedorRepository fornecedorRepository = new FornecedorRepository();
+        boolean retornoBanco = false;
+        
+        if(Integer.parseInt(txtId.getText()) == 0){
+            //inserir
+            retornoBanco = fornecedorRepository.inserir(
+                janelaPrincipal.conexaoMySQL.connection, 
+                fornecedor);
+        }else{
+            //atualizar
+            retornoBanco = fornecedorRepository.atualizar(
+                janelaPrincipal.conexaoMySQL.connection, 
+                fornecedor);
+        }
+        
+        if(retornoBanco){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Cadastro atualizado com sucesso!",
+                    "Tela de cadastro",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            //limpar a janela
+            limparJanela();
+        }   
+    }//GEN-LAST:event_btnGravarActionPerformed
+
+    private void limparJanela(){
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtTelefone.setText("");
+        txtCNPJ.setText("");
+        txtIncricaoEstadual.setText("");
+        txtNomeFantasia.setText("");
+        txtCategoria.setText("");
+        txtNome.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvancar;
@@ -228,7 +311,6 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnRetroceder;
-    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -241,6 +323,7 @@ public class JanelaCadastroForncedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCNPJ;
     private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIncricaoEstadual;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeFantasia;
