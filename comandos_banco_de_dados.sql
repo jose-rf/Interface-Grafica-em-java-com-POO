@@ -20,3 +20,21 @@ CREATE TABLE cadastro.uf (
     CONSTRAINT uf_pk PRIMARY KEY (id)
 );
 
+select * from cadastro.uf;
+
+CREATE TABLE cadastro.cadastro_fornecedor (
+    id INT AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    telefone VARCHAR(100) NOT NULL,
+    cnpj VARCHAR(20) NOT NULL,
+    inscricao_estadual VARCHAR(20) NOT NULL,
+    nome_fantasia VARCHAR(100) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    uf_id INT NOT NULL,
+    CONSTRAINT cadastro_fornecedor_pk PRIMARY KEY (id),
+    CONSTRAINT cadastro_fornecedor_uf_fk FOREIGN KEY (uf_id) REFERENCES cadastro.uf(id)
+);
+
+SELECT * FROM cadastro.cadastro_fornecedor;
+
